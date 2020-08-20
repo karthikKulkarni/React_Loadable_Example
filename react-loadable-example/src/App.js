@@ -5,8 +5,12 @@ import "./App.css";
 
 const LoadableOnDemand = Loadable({
   loader: () => import("./components/OnDemandComponent"),
+  render(loaded, props) {
+    let Component = loaded.default;
+    return <Component {...props} />;
+  },
   loading() {
-    return <h1>Loading split out code...</h1>;
+    return <h1>Loading...</h1>;
   },
 });
 
@@ -17,7 +21,7 @@ function App() {
         <React.Fragment>
           <Link to="getOnDemand">Get On Demand Component</Link>
           <Router>
-            <LoadableOnDemand path="getOnDemand" />
+            <LoadableOnDemand path="getOnDemand" name="Alen" />
           </Router>
         </React.Fragment>
       </header>
